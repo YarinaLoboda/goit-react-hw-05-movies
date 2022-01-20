@@ -48,42 +48,40 @@ const SearchFormInput = styled.input`
 `;
 
 export default function MoviesPage() {
-  const [querry, setQuerry] = useState('');
+  const [query, setQuery] = useState('');
   const [searchResult, setSearchResult] = useState(null);
 
   useEffect(() => {
-    if (!querry) {
+    if (!query) {
       return;
     }
-    moviesAPI.fetchSearchMovie(querry).then(({ results }) => {
+    moviesAPI.fetchSearchMovie(query).then(({ results }) => {
       setSearchResult(results);
     });
-  }, [querry]);
+  }, [query]);
 
   const handleFormSubmit = evt => {
     evt.preventDefault();
-    setQuerry(document.forms.querryForm.querry.value);
-    document.forms.querryForm.querry.value = '';
+    setQuery(document.forms.queryForm.query.value);
+    document.forms.queryForm.query.value = '';
   };
 
   return (
     <>
-      <SearchForm name="querryForm" onSubmit={handleFormSubmit}>
+      <SearchForm name="queryForm" onSubmit={handleFormSubmit}>
         <SearchFormInput
           type="text"
-          name="querry"
+          name="query"
           autocomplete="off"
           autoFocus
           placeholder="Search movies "
-          // value={querry}
-          // onChange={handleChange}
         />
         <SearchFormButton type="submit">Search</SearchFormButton>
       </SearchForm>
 
       {searchResult && (
         <>
-          <h2>Result by search "{querry}"</h2>
+          <h2>Result by search "{query}"</h2>
           <ul>
             {searchResult.map(el => (
               <li key={el.id}>
