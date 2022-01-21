@@ -33,6 +33,6 @@ export function fetchReviewsById(movieId) {
 
 export function fetchSearchMovie(querry) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/search/movie/?query=${querry}&api_key=${API_KEY}`,
+    `${BASE_URL}/search/movie?query=${querry}&api_key=${API_KEY}`,
   );
 }

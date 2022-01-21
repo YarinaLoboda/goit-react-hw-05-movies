@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { IMG_URL } from '../services/constList';
-import * as moviesAPI from '../services/movies-api';
-import NotFoundMsg from './NotFoundMsg';
+import * as moviesAPI from '../../services/movies-api';
+import NotFoundMsg from '../../components/NotFoundMsg/NotFoundMsg';
+import getImg from '../../services/getImg';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -20,7 +20,7 @@ export default function Cast() {
         <ul>
           {cast.map(el => (
             <li key={el.id}>
-              <img src={IMG_URL + el.profile_path} alt={el.name} width={150} />
+              <img src={getImg(el)} alt={el.name} width={150} />
               <p>{el.name}</p>
             </li>
           ))}

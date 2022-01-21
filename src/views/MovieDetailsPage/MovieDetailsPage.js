@@ -1,34 +1,18 @@
 import { useState, useEffect, lazy } from 'react';
 import { useParams, Route } from 'react-router-dom';
 import { useLocation, useHistory } from 'react-router-dom';
-import { IMG_URL } from '../services/constList';
-import * as moviesAPI from '../services/movies-api';
+import * as moviesAPI from '../../services/movies-api';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import styles from './MoviePage.module.css';
-import styled from 'styled-components';
+import getImg from '../../services/getImg';
+import styles from './MovieDetailsPage.module.css';
+import GoBackButton from '../GoBackButton.styled';
 
-const Cast = lazy(() => import('./Cast.js' /* webpackChunkName: "Cast" */));
-const Reviews = lazy(() =>
-  import('./Reviews.js' /* webpackChunkName: "Reviews" */),
+const Cast = lazy(() =>
+  import('../Cast/Cast.js' /* webpackChunkName: "Cast" */),
 );
-
-const GoBackButton = styled.button`
-   {
-    display: inline-block;
-    margin: 15px;
-    width: 120px;
-    height: 40px;
-    border: 1px solid #aaa;
-    opacity: 0.6;
-    font-weight: 600;
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    outline: none;
-  }
-  &: hover {
-    opacity: 1;
-  }
-`;
+const Reviews = lazy(() =>
+  import('../Reviews/Reviews.js' /* webpackChunkName: "Reviews" */),
+);
 
 export default function MovieDetailsPage() {
   const { url } = useRouteMatch();
@@ -55,11 +39,7 @@ export default function MovieDetailsPage() {
       <br />
       {movie && (
         <>
-          <img
-            src={IMG_URL + movie.poster_path}
-            width={300}
-            alt={movie.title}
-          />
+          <img src={getImg(movie)} width={300} alt={movie.title} />
           <h2>
             {movie.title} ({movie.release_date.substr(0, 4)})
           </h2>
@@ -87,7 +67,6 @@ export default function MovieDetailsPage() {
           <NavLink
             to={{
               pathname: `${url}/reviews`,
-              state: { from: location },
             }}
             className={styles.link}
             activeClassName={styles.activeLink}

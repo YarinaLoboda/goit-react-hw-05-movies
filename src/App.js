@@ -2,18 +2,20 @@ import { Switch, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Navigation from './components/Navigation/Navigation';
 const HomePage = lazy(() =>
-  import('./views/HomePage.js' /* webpackChunkName: "Home-page" */),
+  import('./views/HomePage/HomePage.js' /* webpackChunkName: "Home-page" */),
 );
 const MoviesPage = lazy(() =>
-  import('./views/MoviesPage.js' /* webpackChunkName: "Movie-page" */),
+  import(
+    './views/MoviesPage/MoviesPage.js' /* webpackChunkName: "Movie-page" */
+  ),
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    './views/MovieDetailsPage.js' /* webpackChunkName: "MovieDetails-page" */
+    './views/MovieDetailsPage/MovieDetailsPage.js' /* webpackChunkName: "MovieDetails-page" */
   ),
 );
 const NotFoundMsg = lazy(() =>
-  import('./views/NotFoundMsg.js' /* webpackChunkName: "NotFoundMsg" */),
+  import('./components/NotFoundMsg/NotFoundMsg.js' /* webpackChunkName: "NotFoundMsg" */),
 );
 
 export default function App() {
